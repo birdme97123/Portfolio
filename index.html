@@ -8,36 +8,37 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Noto+Sans+KR:wght@400;500;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
-/* Layout idea: 왼쪽 고정 인덱스 + 오른쪽 3개 섹션(사이트 / 원페이지 / 팝업·이벤트), 작업물이 주인공이라 색은 절제 */
+
 :root{
-  --paper:#f1f2ee; --surface:#fafaf7; --ink:#15171c; --muted:#5d636d;
-  --line:#d6d8d2; --accent:#2b44ff; --accent-ink:#ffffff; --ph:#e4e6e0;
-  --font-display:"Bricolage Grotesque","Noto Sans KR",system-ui,sans-serif;
-  --font-body:"Noto Sans KR",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --font-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
-  color-scheme:light;
+--paper:#f1f2ee; --surface:#fafaf7; --ink:#15171c; --muted:#5d636d;
+--line:#d6d8d2; --accent:#2b44ff; --accent-ink:#ffffff; --ph:#e4e6e0;
+--font-display:"Bricolage Grotesque","Noto Sans KR",system-ui,sans-serif;
+--font-body:"Noto Sans KR",system-ui,-apple-system,"Segoe UI",sans-serif;
+--font-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+color-scheme:light;
 }
 @media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --paper:#111318; --surface:#181b22; --ink:#eceef2; --muted:#9aa1ad;
-    --line:#2a2e37; --accent:#8da0ff; --accent-ink:#0d1020; --ph:#1d2129;
-    color-scheme:dark;
-  }
+:root:not([data-theme="light"]){
+--paper:#111318; --surface:#181b22; --ink:#eceef2; --muted:#9aa1ad;
+--line:#2a2e37; --accent:#8da0ff; --accent-ink:#0d1020; --ph:#1d2129;
+color-scheme:dark;
+}
 }
 :root[data-theme="dark"]{
-  --paper:#111318; --surface:#181b22; --ink:#eceef2; --muted:#9aa1ad;
-  --line:#2a2e37; --accent:#8da0ff; --accent-ink:#0d1020; --ph:#1d2129;
-  color-scheme:dark;
+--paper:#111318; --surface:#181b22; --ink:#eceef2; --muted:#9aa1ad;
+--line:#2a2e37; --accent:#8da0ff; --accent-ink:#0d1020; --ph:#1d2129;
+color-scheme:dark;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:72px}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased;}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
 button{font:inherit;color:inherit}
 
-.shell{max-width:none}
+.shell{max-width:none; }
 .side{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:14px clamp(20px,5vw,72px);background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.side>div{width:1280px; margin: 0 auto;}
 .brand{font-family:var(--font-display);font-weight:700;font-size:1.15rem;letter-spacing:-.02em;text-decoration:none;display:flex;align-items:baseline;gap:10px;white-space:nowrap}
 .brand small{font-family:var(--font-body);font-weight:400;font-size:.8rem;color:var(--muted);letter-spacing:0}
 .nav{display:flex;gap:28px;margin:0;overflow-x:auto}
@@ -48,16 +49,37 @@ button{font:inherit;color:inherit}
 .nav a[aria-current="true"] span{color:var(--accent)}
 .side-foot{display:none}
 
-main{padding:48px clamp(20px,5vw,72px) 80px;min-width:0;max-width:1180px;margin:0 auto}
+main{padding:50px 0px;min-width:0;max-width:1280px;margin:0 auto;  padding: 1.8em;}
 .note{display:flex;gap:12px;align-items:flex-start;padding:12px 16px;border:1px dashed var(--line);border-radius:8px;font-size:.85rem;color:var(--muted);background:var(--surface);margin-bottom:56px}
 .note b{color:var(--ink)}
 .note[hidden]{display:none}
 
-.hero{padding:24px 0 72px;border-bottom:1px solid var(--line)}
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,580px);gap:40px;align-items:center;padding:24px 0 72px;border-bottom:1px solid var(--line)}
+.hero-art{width:100%;max-width:580px;justify-self:end;display:grid;grid-template-columns:auto minmax(0,1fr) auto;column-gap:14px}
+.hero-art .win{grid-column:2;grid-row:1}
+.win{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface);box-shadow:0 24px 50px -24px rgba(0,0,0,.28)}
+.win-bar{display:flex;align-items:center;gap:6px;padding:10px 14px;border-bottom:1px solid var(--line)}
+.win-bar i{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.win-url{margin-left:10px;flex:1;min-width:0;font-family:var(--font-mono);font-size:.7rem;color:var(--muted);background:var(--paper);border-radius:999px;padding:3px 14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.win-view{all:unset;display:block;position:relative;width:100%;aspect-ratio:1/1.05;overflow:hidden;cursor:zoom-in;background:var(--ph)}
+.win-view:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.win-view img{position:absolute;left:0;top:0;width:100%;height:auto;opacity:0;transition:opacity .6s}
+.win-view img.on{opacity:1}
+.win-dots{grid-column:2;grid-row:2;display:flex;align-items:center;justify-content:center;gap:6px;padding-top:6px}
+.win-dots .dot{all:unset;cursor:pointer;padding:10px 4px}
+.win-dots .dot::before{content:"";display:block;width:28px;height:4px;border-radius:2px;background:var(--line);transition:background .25s}
+.win-dots .dot:hover::before{background:var(--muted)}
+.win-dots .dot.on::before{background:var(--accent)}
+.win-body{position:relative}
+.nav-btn{all:unset;box-sizing:border-box;grid-row:1;align-self:center;width:40px;height:40px;display:grid;place-items:center;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-size:1.4rem;line-height:1;padding-bottom:3px;cursor:pointer;opacity:.85;transition:opacity .2s,color .2s,border-color .2s}
+.nav-btn.prev{grid-column:1}
+.nav-btn.next{grid-column:3}
+.nav-btn:hover{opacity:1;color:var(--accent);border-color:var(--accent)}
+.win-dots .dot:focus-visible,.nav-btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .eyebrow{font-family:var(--font-mono);font-size:.78rem;color:var(--accent);letter-spacing:.04em}
-.hero h1{font-family:var(--font-display);font-weight:700;font-size:clamp(2.2rem,5.6vw,4.4rem);line-height:1.12;letter-spacing:-.03em;margin:16px 0 24px;max-width:15em;text-wrap:balance}
+.hero h1{font-family:var(--font-display);font-weight:700;font-size:clamp(2.2rem,5.6vw,3.5rem);line-height:1.12;letter-spacing:-.03em;margin:16px 0 24px;max-width:15em;text-wrap:balance;word-break:keep-all}
 .hero h1 em{font-style:normal;background:linear-gradient(transparent 62%,color-mix(in srgb,var(--accent) 28%,transparent) 62%)}
-.hero p{max-width:34em;color:var(--muted);margin:0}
+.hero p{max-width:34em;color:var(--muted);margin:0;white-space:pre-line}
 .stats{display:flex;gap:40px;flex-wrap:wrap;margin-top:40px}
 .stat b{display:block;font-family:var(--font-display);font-size:2.2rem;line-height:1.1;letter-spacing:-.02em}
 .stat span{font-size:.85rem;color:var(--muted)}
@@ -66,7 +88,7 @@ section.block{padding:88px 0 0}
 .sec-head{display:flex;gap:20px;align-items:baseline;flex-wrap:wrap;margin-bottom:12px}
 .sec-head .no{font-family:var(--font-mono);font-size:.8rem;color:var(--accent)}
 .sec-head h2{font-family:var(--font-display);font-weight:700;font-size:clamp(1.6rem,3vw,2.2rem);letter-spacing:-.02em;margin:0;line-height:1.2}
-.sec-desc{color:var(--muted);margin:0 0 32px;max-width:40em;font-size:.95rem}
+.sec-desc{color:var(--muted);margin:0 0 32px;max-width:40em;font-size:1rem}
 
 /* 01 사이트 링크 */
 .sites{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
@@ -135,120 +157,135 @@ section.block{padding:88px 0 0}
 .lb-scroll img{display:block;max-width:min(100%,960px);height:auto;border-radius:6px;box-shadow:0 8px 40px rgba(0,0,0,.18)}
 
 @media (max-width:860px){
-  .side{padding:10px 20px;gap:16px}
-  .nav{gap:18px}
-  .nav a span,.brand small{display:none}
-  .site a{grid-template-columns:32px minmax(0,1fr) 24px}
-  .site .chip{display:none}
+.hero{grid-template-columns:1fr}
+.hero-art{justify-self:stretch;max-width:none;column-gap:8px}
+.nav-btn{width:32px;height:32px;font-size:1.15rem}
+.side{padding:10px 20px;gap:16px}
+.nav{gap:18px}
+.nav a span,.brand small{display:none}
+.site a{grid-template-columns:32px minmax(0,1fr) 24px}
+.site .chip{display:none}
 }
 @media (prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  *{transition:none!important}
+html{scroll-behavior:auto}
+*{transition:none!important}
 }
 </style>
 </head>
 <body>
 <div class="shell">
-  <aside class="side">
+<aside class="side">
+<div>
+  <a class="brand" href="#top" id="brandName">현서림<small id="brandRole">웹퍼블리셔</small></a>
+  <nav class="nav" aria-label="포트폴리오 목차">
+    <a href="#sites"><span>01</span>제작한 사이트</a>
+    <a href="#onepage"><span>02</span>원페이지 웹디자인</a>
+    <a href="#popup"><span>03</span>팝업 · 이벤트</a>
+    <a href="#contact"><span>→</span>연락하기</a>
+  </nav>
+</div>
+<div class="side-foot" id="sideYear"></div>
+</aside>
+
+<main id="top">
+
+
+<header class="hero">
+  <div class="hero-text">
+    <div class="eyebrow">PORTFOLIO · WEB PUBLISHING &amp; DESIGN</div>
+    <h1>웹퍼블리싱 & 디자인<br><em>PORTFOLIO</em></h1>
+    <p id="intro"></p>
+    <div class="stats" id="stats"></div>
+  </div>
+  <div class="hero-art" id="heroArt"></div>
+</header>
+
+<section class="block" id="sites" aria-labelledby="h-sites">
+  <div class="sec-head"><span class="no">01</span><h2 id="h-sites">제작한 사이트</h2></div>
+  <p class="sec-desc">실제로 제작하고 운영한 홈페이지입니다.<br>고객의 니즈에 맞춰 메인부터 병원소개, 서브페이지까지 제작했습니다.</p>
+  <ul class="sites" id="siteList"></ul>
+</section>
+
+<section class="block" id="onepage" aria-labelledby="h-one">
+  <div class="sec-head"><span class="no">02</span><h2 id="h-one">원페이지 웹디자인</h2></div>
+  <p class="sec-desc">긴 페이지 한 장에 흐름을 담은 작업물입니다.<br>마우스를 올리면 위에서 아래로 스크롤되고, 클릭하면 크게 볼 수 있습니다.</p>
+  <div class="onepages" id="onepageList"></div>
+</section>
+
+<section class="block" id="popup" aria-labelledby="h-pop">
+  <div class="sec-head"><span class="no">03</span><h2 id="h-pop">팝업 · 이벤트 · 배너</h2></div>
+  <p class="sec-desc">공지 팝업과 이벤트 팝업, 홈페이지 배너 작업물입니다.</p>
+  <div class="filters" id="filters" role="group" aria-label="종류 필터"></div>
+  <div class="popups" id="popupList"></div>
+</section>
+
+<section class="contact" id="contact" aria-labelledby="h-contact">
+  <div class="contact-box">
     <div>
-      <a class="brand" href="#top" id="brandName">홍길동<small id="brandRole">웹퍼블리셔</small></a>
-      <nav class="nav" aria-label="포트폴리오 목차">
-        <a href="#sites"><span>01</span>제작한 사이트</a>
-        <a href="#onepage"><span>02</span>원페이지 웹디자인</a>
-        <a href="#popup"><span>03</span>팝업 · 이벤트</a>
-        <a href="#contact"><span>→</span>연락하기</a>
-      </nav>
+      <h2 id="h-contact">함께 일할 기회를 기다립니다.</h2>
+      <p id="mailText"></p>
     </div>
-    <div class="side-foot" id="sideYear"></div>
-  </aside>
-
-  <main id="top">
-    <div class="note" id="note" role="note">
-      <div><b>샘플 상태입니다.</b> 이미지 칸의 “이미지 불러오기”로 미리 볼 수 있고, 새로고침하면 사라집니다. 실제 파일은 아래 script 맨 위 <b>DATA</b>의 img 경로에 적어 주세요.</div>
+    <div class="btn-row">
+      <a class="btn" id="mailLink" href="#">메일 보내기</a>
+      <button class="btn ghost" id="copyMail" type="button">주소 복사</button>
     </div>
-
-    <header class="hero">
-      <div class="eyebrow">PORTFOLIO · WEB PUBLISHING &amp; DESIGN</div>
-      <h1>보기 좋고, 바로 쓰이는 <em>화면</em>을 만듭니다.</h1>
-      <p id="intro"></p>
-      <div class="stats" id="stats"></div>
-    </header>
-
-    <section class="block" id="sites" aria-labelledby="h-sites">
-      <div class="sec-head"><span class="no">01</span><h2 id="h-sites">제작한 사이트</h2></div>
-      <p class="sec-desc">실제로 제작하고 운영한 홈페이지입니다. 줄을 누르면 해당 사이트가 새 탭에서 열립니다.</p>
-      <ul class="sites" id="siteList"></ul>
-    </section>
-
-    <section class="block" id="onepage" aria-labelledby="h-one">
-      <div class="sec-head"><span class="no">02</span><h2 id="h-one">원페이지 웹디자인</h2></div>
-      <p class="sec-desc">긴 페이지 한 장에 흐름을 담은 작업물입니다. 마우스를 올리면 위에서 아래로 스크롤되고, 클릭하면 크게 볼 수 있습니다.</p>
-      <div class="onepages" id="onepageList"></div>
-    </section>
-
-    <section class="block" id="popup" aria-labelledby="h-pop">
-      <div class="sec-head"><span class="no">03</span><h2 id="h-pop">팝업 · 이벤트</h2></div>
-      <p class="sec-desc">공지 팝업과 이벤트 팝업, 사이즈별 리사이징 작업물입니다.</p>
-      <div class="filters" id="filters" role="group" aria-label="종류 필터"></div>
-      <div class="popups" id="popupList"></div>
-    </section>
-
-    <section class="contact" id="contact" aria-labelledby="h-contact">
-      <div class="contact-box">
-        <div>
-          <h2 id="h-contact">함께 일할 기회를 기다립니다.</h2>
-          <p id="mailText"></p>
-        </div>
-        <div class="btn-row">
-          <a class="btn" id="mailLink" href="#">메일 보내기</a>
-          <button class="btn ghost" id="copyMail" type="button">주소 복사</button>
-        </div>
-      </div>
-    </section>
-  </main>
+  </div>
+</section>
+</main>
 </div>
 
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="이미지 확대" hidden>
-  <div class="lb-bar"><p id="lbCap"></p><button class="lb-close" id="lbClose" type="button">닫기 (Esc)</button></div>
-  <div class="lb-scroll" id="lbScroll"><img id="lbImg" alt=""></div>
+<div class="lb-bar"><p id="lbCap"></p><button class="lb-close" id="lbClose" type="button">닫기 (Esc)</button></div>
+<div class="lb-scroll" id="lbScroll"><img id="lbImg" alt=""></div>
 </div>
 
 <script>
 /* ============================================================
-   DATA — 여기만 고치면 됩니다.
-   img: 이미지 파일 경로 (예: "images/onepage-01.jpg"). 비워 두면 빈 칸이 나옵니다.
-   url: 제작한 사이트 주소.  kind: 팝업 종류("공지" 또는 "이벤트").  size: "가로×세로" px.
-   ============================================================ */
+DATA — 여기만 고치면 됩니다.
+img: 이미지 파일 경로 (예: "images/onepage-01.jpg"). 비워 두면 빈 칸이 나옵니다.
+url: 제작한 사이트 주소.  kind: 팝업 종류("공지" 또는 "이벤트").  size: "가로×세로" px.
+============================================================ */
 const DATA = {
-  profile: {
-    name: "홍길동",
-    role: "웹퍼블리셔",
-    email: "hello@example.com",
-    intro: "병원 마케팅 홈페이지부터 원페이지, 이벤트 팝업까지. 전용 빌더와 코드로 제작해 온 작업을 모았습니다.",
-    stats: [
-      { num: "3년", label: "웹퍼블리싱 실무" },
-      { num: "80+", label: "제작·운영한 홈페이지" }
-    ]
-  },
-  sites: [
-    { title: "○○치과 공식 홈페이지", type: "병원", year: "2025", url: "https://example.com/" },
-    { title: "○○피부과 이벤트 홈페이지", type: "병원", year: "2025", url: "https://example.com/" },
-    { title: "○○한의원 공식 홈페이지", type: "병원", year: "2024", url: "https://example.com/" },
-    { title: "바이브 코딩으로 만든 소개 페이지", type: "코드", year: "2025", url: "https://example.com/" }
-  ],
-  onepages: [
-    { title: "○○치과 임플란트 이벤트", tag: "원페이지", img: "" },
-    { title: "○○피부과 시술 소개", tag: "원페이지", img: "" },
-    { title: "○○한의원 다이어트 프로그램", tag: "원페이지", img: "" }
-  ],
-  popups: [
-    { title: "11월 정기휴무 안내", kind: "공지", size: "600×700", img: "" },
-    { title: "신규 오픈 이벤트", kind: "이벤트", size: "600×800", img: "" },
-    { title: "연말 감사 이벤트", kind: "이벤트", size: "700×700", img: "" },
-    { title: "진료시간 변경 안내", kind: "공지", size: "500×600", img: "" },
-    { title: "첫 방문 혜택", kind: "이벤트", size: "600×900", img: "" },
-    { title: "모바일용 리사이징", kind: "이벤트", size: "360×480", img: "" }
-  ]
+profile: {
+name: "현서림",
+role: "웹퍼블리셔",
+email: "birdme9712@naver.com",
+intro: "병원 마케팅 홈페이지부터 원페이지, 이벤트 팝업까지. \n 전용 빌더와 코드, 포토샵로 제작해 온 작업을 모았습니다.",
+stats: [
+  { num: "3년", label: "웹퍼블리싱 실무" },
+  { num: "80+", label: "제작·운영한 홈페이지" }
+]
+},
+sites: [
+{ title: "오케이라인치과 홈페이지", type: "병원", year: "2026", url: "https://www.kjokline.com/" },
+{ title: "마음감기정신건강의학과 홈페이지", type: "병원", year: "2026", url: "https://www.maumgamgi.com/main" },
+{ title: "세이브외과 홈페이지", type: "병원", year: "2025", url: "https://www.save2020.co.kr/main" },
+{ title: "뷰커스의원 강서점", type: "병원", year: "2025", url: "https://www.beaucus.com/main/" }
+],
+onepages: [
+{ title: "육군사관학교 웹디자인-메인", tag: "원페이지", img: "https://i.imgur.com/qWpt4oB.jpeg" },
+{ title: "육군사관학교 웹디자인-서브", tag: "원페이지", img: "https://i.imgur.com/NHANAdO.jpeg" },
+{ title: "래디어스 소개 페이지", tag: "원페이지", img: "https://i.imgur.com/GgEqAT5.jpeg" },
+{ title: "래디어스 소개 페이지2", tag: "원페이지", img: "https://i.imgur.com/UB3BecO.jpeg" },
+{ title: "리쥬란 소개 페이지", tag: "원페이지", img: "https://i.imgur.com/8vmk83J.jpeg" },
+{ title: "피부과 패키지 소개", tag: "원페이지", img: "https://i.imgur.com/uCzygVT.jpeg" },
+{ title: "한방병원 질환 소개", tag: "원페이지", img: "https://i.imgur.com/NoUVMNE.jpeg" },
+{ title: "동활인서 소개", tag: "서브페이지", img: "https://i.imgur.com/4o9pJid.jpeg" }
+],
+popups: [
+{ title: "행사 후기", kind: "팝업", size: "600×700", img: "https://i.imgur.com/7k1blH5.jpeg" },
+{ title: "의원 소개", kind: "배너", size: "1903×700", img: "https://i.imgur.com/JqbIGIr.jpeg" },
+  { title: "줄기세포주사 소개", kind: "배너", size: "360×480", img: "https://i.imgur.com/YlIGTuz.jpeg" },
+    { title: "임플란트 소개", kind: "배너", size: "360×480", img: "https://i.imgur.com/8Cxei1V.jpeg" },
+{ title: "텐트리플-모바일", kind: "이벤트", size: "700×700", img: "https://i.imgur.com/GRpnmKF.jpeg" },
+{ title: "슈링크 유니버스-모바일", kind: "이벤트", size: "700×700", img: "https://i.imgur.com/rXjJGMw.jpeg" },
+    { title: "리프테리2-모바일", kind: "이벤트", size: "700×700", img: "https://i.imgur.com/fCsQMdr.jpeg" },
+{ title: "2025년 12월 진료일정", kind: "팝업", size: "500×600", img: "https://i.imgur.com/JUDsAt3.jpeg" },
+{ title: "2026년 1월 진료일정", kind: "팝업", size: "600×900", img: "https://i.imgur.com/qKHAKLP.jpeg" },
+{ title: "마취통증-주차안내", kind: "팝업", size: "600×900", img: "https://i.imgur.com/3q7TznG.jpeg" },
+  { title: "치과-가격인하", kind: "팝업", size: "600×900", img: "https://i.imgur.com/Kqfuv6Z.jpeg" }
+
+]
 };
 
 /* ---------- 코드 ---------- */
@@ -256,126 +293,205 @@ const $ = (s, r = document) => r.querySelector(s);
 const esc = v => String(v).replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
 const state = { filter: "전체" };
 let lastFocus = null;
+let heroTimer = null;
 
 function ratio(size) {
-  const m = String(size || "").match(/(\d+)\D+(\d+)/);
-  return m ? `${m[1]} / ${m[2]}` : "3 / 4";
+const m = String(size || "").match(/(\d+)\D+(\d+)/);
+return m ? `${m[1]} / ${m[2]}` : "3 / 4";
 }
 
 function emptySlot(group, i, label) {
-  const id = `pick-${group}-${i}`;
-  return `<div class="ph"><strong>${esc(label)}</strong><span>작업물 이미지를 넣어 주세요</span>
-    <input class="pick" type="file" accept="image/*" id="${id}" data-group="${group}" data-i="${i}">
-    <label class="pick-btn" for="${id}">이미지 불러오기</label></div>`;
+const id = `pick-${group}-${i}`;
+return `<div class="ph"><strong>${esc(label)}</strong><span>작업물 이미지를 넣어 주세요</span>
+<input class="pick" type="file" accept="image/*" id="${id}" data-group="${group}" data-i="${i}">
+<label class="pick-btn" for="${id}">이미지 불러오기</label></div>`;
+}
+
+function heroShow() {
+  const box = $("#heroArt");
+  clearTimeout(heroTimer);
+  const items = DATA.onepages.map((o, i) => ({ o, i })).filter(x => x.o.img).slice(0, 4);
+  if (!items.length) { box.innerHTML = ""; return; }
+  const multi = items.length > 1;
+  box.innerHTML = `${multi ? `<button type="button" class="nav-btn prev" data-dir="-1" aria-label="이전 작품">‹</button>` : ""}<div class="win"><div class="win-bar"><i></i><i></i><i></i><span class="win-url" id="winUrl"></span></div>
+    <div class="win-body"><button class="win-view open" type="button" id="winView" data-group="onepages" data-i="${items[0].i}" aria-label="작업물 크게 보기">${items.map(x => `<img src="${esc(x.o.img)}" alt="">`).join("")}</button></div></div>${multi ? `<button type="button" class="nav-btn next" data-dir="1" aria-label="다음 작품">›</button><div class="win-dots">${items.map((x, j) => `<button type="button" class="dot" aria-label="${j + 1}번째 작품: ${esc(x.o.title)}"></button>`).join("")}</div>` : ""}`;
+  const view = $("#winView");
+  const imgs = [...view.querySelectorAll("img")];
+  const dots = [...box.querySelectorAll(".win-dots .dot")];
+  const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let k = 0;
+  let auto = true;
+  let paused = false;
+  const next = () => { k = (k + 1) % imgs.length; play(); };
+  function play() {
+    const img = imgs[k];
+    if (!img.complete) {
+      const idx = k;
+      img.addEventListener("load", () => { if (k === idx) play(); }, { once: true });
+      img.addEventListener("error", () => { if (k === idx) next(); }, { once: true });
+      return;
+    }
+    img.style.transition = "none";
+    img.style.transform = "translateY(0)";
+    void img.offsetHeight;
+    imgs.forEach((m, j) => m.classList.toggle("on", j === k));
+    dots.forEach((d, j) => { d.classList.toggle("on", j === k); d.setAttribute("aria-current", String(j === k)); });
+    view.dataset.i = items[k].i;
+    $("#winUrl").textContent = items[k].o.title;
+    const dist = img.offsetHeight - view.clientHeight;
+    const sec = dist > 0 ? Math.min(Math.max(dist / 120, 5), 14) : 0;
+    img.style.transition = `opacity .6s, transform ${sec}s linear .8s`;
+    if (still || paused) return;
+    if (dist > 0) img.style.transform = `translateY(-${dist}px)`;
+    if (auto && imgs.length > 1) heroTimer = setTimeout(next, (sec + 2) * 1000);
+  }
+  const go = j => {
+    auto = false;
+    clearTimeout(heroTimer);
+    k = (j + imgs.length) % imgs.length;
+    play();
+  };
+  dots.forEach((d, j) => d.addEventListener("click", () => go(j)));
+  box.querySelectorAll(".nav-btn").forEach(b => b.addEventListener("click", () => go(k + Number(b.dataset.dir))));
+
+  /* 마우스를 올리면 스크롤과 자동 전환을 멈추고, 벗어나면 이어서 진행 */
+  const curY = img => new DOMMatrix(getComputedStyle(img).transform).m42;
+  const pause = () => {
+    if (paused || still) return;
+    paused = true;
+    clearTimeout(heroTimer);
+    const img = imgs[k];
+    const y = curY(img);
+    img.style.transition = "opacity .6s";
+    img.style.transform = `translateY(${y}px)`;
+  };
+  const resume = () => {
+    if (!paused) return;
+    paused = false;
+    const img = imgs[k];
+    const dist = img.offsetHeight - view.clientHeight;
+    let sec = 0;
+    if (dist > 0) {
+      sec = Math.max((dist + curY(img)) / 120, 0.5);
+      img.style.transition = `opacity .6s, transform ${sec}s linear`;
+      img.style.transform = `translateY(-${dist}px)`;
+    }
+    if (auto && imgs.length > 1) heroTimer = setTimeout(next, (sec + 2) * 1000);
+  };
+  const win = $(".win", box);
+  win.addEventListener("pointerenter", e => { if (e.pointerType === "mouse") pause(); });
+  win.addEventListener("pointerleave", e => { if (e.pointerType === "mouse") resume(); });
+  play();
 }
 
 function renderHero() {
-  const p = DATA.profile;
-  $("#brandName").firstChild.textContent = p.name;
-  $("#brandRole").textContent = p.role;
-  $("#intro").textContent = p.intro;
-  $("#stats").innerHTML = p.stats.map(s => `<div class="stat"><b>${esc(s.num)}</b><span>${esc(s.label)}</span></div>`).join("");
-  $("#mailText").textContent = p.email;
-  $("#mailLink").href = "mailto:" + p.email;
-  $("#sideYear").textContent = "© " + new Date().getFullYear() + " " + p.name;
+const p = DATA.profile;
+$("#brandName").firstChild.textContent = p.name;
+$("#brandRole").textContent = p.role;
+$("#intro").textContent = p.intro;
+heroShow();
+$("#stats").innerHTML = p.stats.map(s => `<div class="stat"><b>${esc(s.num)}</b><span>${esc(s.label)}</span></div>`).join("");
+$("#mailText").textContent = p.email;
+$("#mailLink").href = "mailto:" + p.email;
+$("#sideYear").textContent = "© " + new Date().getFullYear() + " " + p.name;
 }
 
 function renderSites() {
-  $("#siteList").innerHTML = DATA.sites.map((s, i) => `
-    <li class="site"><a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">
-      <span class="n">${String(i + 1).padStart(2, "0")}</span>
-      <div><h3>${esc(s.title)}</h3><div class="meta">${esc(s.url.replace(/^https?:\/\//, ""))} · ${esc(s.year)}</div></div>
-      <span class="chip">${esc(s.type)}</span>
-      <span class="arrow" aria-hidden="true">↗</span>
-    </a></li>`).join("");
+$("#siteList").innerHTML = DATA.sites.map((s, i) => `
+<li class="site"><a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">
+  <span class="n">${String(i + 1).padStart(2, "0")}</span>
+  <div><h3>${esc(s.title)}</h3><div class="meta">${esc(s.url.replace(/^https?:\/\//, ""))} · ${esc(s.year)}</div></div>
+  <span class="chip">${esc(s.type)}</span>
+  <span class="arrow" aria-hidden="true">↗</span>
+</a></li>`).join("");
 }
 
 function renderOnepages() {
-  $("#onepageList").innerHTML = DATA.onepages.map((o, i) => `
-    <article class="card">
-      <div class="frame">${o.img
-        ? `<button class="open" type="button" data-group="onepages" data-i="${i}" aria-label="${esc(o.title)} 크게 보기"><img src="${esc(o.img)}" alt="${esc(o.title)} 원페이지 디자인"></button><span class="hint">Hover · 스크롤</span>`
-        : emptySlot("onepages", i, "ONE-PAGE " + String(i + 1).padStart(2, "0"))}</div>
-      <h3>${esc(o.title)}</h3><div class="meta">${esc(o.tag)}</div>
-    </article>`).join("");
-  document.querySelectorAll(".frame").forEach(frame => {
-    const img = $("img", frame);
-    if (!img) return;
-    const start = () => {
-      const dist = img.offsetHeight - frame.clientHeight;
-      if (dist <= 0) return;
-      const sec = Math.min(Math.max(dist / 350, 2), 9);
-      img.style.transition = `transform ${sec}s linear`;
-      img.style.transform = `translateY(-${dist}px)`;
-    };
-    const stop = () => { img.style.transition = "transform .6s ease"; img.style.transform = "translateY(0)"; };
-    frame.addEventListener("mouseenter", start);
-    frame.addEventListener("mouseleave", stop);
-    frame.addEventListener("focusin", start);
-    frame.addEventListener("focusout", stop);
-  });
+$("#onepageList").innerHTML = DATA.onepages.map((o, i) => `
+<article class="card">
+  <div class="frame">${o.img
+    ? `<button class="open" type="button" data-group="onepages" data-i="${i}" aria-label="${esc(o.title)} 크게 보기"><img src="${esc(o.img)}" alt="${esc(o.title)} 원페이지 디자인"></button><span class="hint">Hover · 스크롤</span>`
+    : emptySlot("onepages", i, "ONE-PAGE " + String(i + 1).padStart(2, "0"))}</div>
+  <h3>${esc(o.title)}</h3><div class="meta">${esc(o.tag)}</div>
+</article>`).join("");
+document.querySelectorAll(".frame").forEach(frame => {
+const img = $("img", frame);
+if (!img) return;
+const start = () => {
+  const dist = img.offsetHeight - frame.clientHeight;
+  if (dist <= 0) return;
+  const sec = Math.min(Math.max(dist / 350, 2), 9);
+  img.style.transition = `transform ${sec}s linear`;
+  img.style.transform = `translateY(-${dist}px)`;
+};
+const stop = () => { img.style.transition = "transform .6s ease"; img.style.transform = "translateY(0)"; };
+frame.addEventListener("mouseenter", start);
+frame.addEventListener("mouseleave", stop);
+frame.addEventListener("focusin", start);
+frame.addEventListener("focusout", stop);
+});
 }
 
 function renderFilters() {
-  const kinds = ["전체", ...new Set(DATA.popups.map(p => p.kind))];
-  $("#filters").innerHTML = kinds.map(k => `<button type="button" aria-pressed="${k === state.filter}" data-kind="${esc(k)}">${esc(k)}</button>`).join("");
+const kinds = ["전체", ...new Set(DATA.popups.map(p => p.kind))];
+$("#filters").innerHTML = kinds.map(k => `<button type="button" aria-pressed="${k === state.filter}" data-kind="${esc(k)}">${esc(k)}</button>`).join("");
 }
 
 function renderPopups() {
-  const list = DATA.popups.map((p, i) => ({ ...p, i })).filter(p => state.filter === "전체" || p.kind === state.filter);
-  $("#popupList").innerHTML = list.length ? list.map(p => `
-    <figure class="pop">
-      <div class="box" ${p.img ? "" : `style="aspect-ratio:${ratio(p.size)}"`}>${p.img
-        ? `<button class="open" type="button" data-group="popups" data-i="${p.i}" aria-label="${esc(p.title)} 크게 보기"><img src="${esc(p.img)}" alt="${esc(p.title)} ${esc(p.kind)} 팝업"></button>`
-        : emptySlot("popups", p.i, p.size + " PX")}</div>
-      <figcaption><b>${esc(p.title)}</b><span>${esc(p.kind)}</span></figcaption>
-    </figure>`).join("") : `<p class="pop-empty">해당 종류의 작업물이 아직 없습니다.</p>`;
+const list = DATA.popups.map((p, i) => ({ ...p, i })).filter(p => state.filter === "전체" || p.kind === state.filter);
+$("#popupList").innerHTML = list.length ? list.map(p => `
+<figure class="pop">
+  <div class="box" ${p.img ? "" : `style="aspect-ratio:${ratio(p.size)}"`}>${p.img
+    ? `<button class="open" type="button" data-group="popups" data-i="${p.i}" aria-label="${esc(p.title)} 크게 보기"><img src="${esc(p.img)}" alt="${esc(p.title)} ${esc(p.kind)} 팝업"></button>`
+    : emptySlot("popups", p.i, p.size + " PX")}</div>
+  <figcaption><b>${esc(p.title)}</b><span>${esc(p.kind)}</span></figcaption>
+</figure>`).join("") : `<p class="pop-empty">해당 종류의 작업물이 아직 없습니다.</p>`;
 }
 
 function renderAll() {
-  renderHero(); renderSites(); renderOnepages(); renderFilters(); renderPopups();
-  const anyEmpty = [...DATA.onepages, ...DATA.popups].some(x => !x.img);
-  $("#note").hidden = !anyEmpty;
+renderHero(); renderSites(); renderOnepages(); renderFilters(); renderPopups();
+const anyEmpty = [...DATA.onepages, ...DATA.popups].some(x => !x.img);
+$("#note").hidden = !anyEmpty;
 }
 
 /* 이미지 미리보기 (이 브라우저 안에서만 유지) */
 document.addEventListener("change", e => {
-  const el = e.target;
-  if (!el.matches || !el.matches(".pick") || !el.files[0]) return;
-  DATA[el.dataset.group][+el.dataset.i].img = URL.createObjectURL(el.files[0]);
-  renderAll();
+const el = e.target;
+if (!el.matches || !el.matches(".pick") || !el.files[0]) return;
+DATA[el.dataset.group][+el.dataset.i].img = URL.createObjectURL(el.files[0]);
+renderAll();
 });
 
 /* 필터 */
 $("#filters").addEventListener("click", e => {
-  const b = e.target.closest("button[data-kind]");
-  if (!b) return;
-  state.filter = b.dataset.kind;
-  renderFilters(); renderPopups();
+const b = e.target.closest("button[data-kind]");
+if (!b) return;
+state.filter = b.dataset.kind;
+renderFilters(); renderPopups();
 });
 
 /* 라이트박스 */
 const lb = $("#lb");
 function openLb(group, i) {
-  const item = DATA[group][i];
-  if (!item || !item.img) return;
-  lastFocus = document.activeElement;
-  $("#lbImg").src = item.img;
-  $("#lbImg").alt = item.title;
-  $("#lbCap").textContent = item.title;
-  lb.hidden = false;
-  $("#lbScroll").scrollTop = 0;
-  document.body.style.overflow = "hidden";
-  $("#lbClose").focus();
+const item = DATA[group][i];
+if (!item || !item.img) return;
+lastFocus = document.activeElement;
+$("#lbImg").src = item.img;
+$("#lbImg").alt = item.title;
+$("#lbCap").textContent = item.title;
+lb.hidden = false;
+$("#lbScroll").scrollTop = 0;
+document.body.style.overflow = "hidden";
+$("#lbClose").focus();
 }
 function closeLb() {
-  lb.hidden = true;
-  document.body.style.overflow = "";
-  if (lastFocus && document.contains(lastFocus)) lastFocus.focus();
+lb.hidden = true;
+document.body.style.overflow = "";
+if (lastFocus && document.contains(lastFocus)) lastFocus.focus();
 }
 document.addEventListener("click", e => {
-  const b = e.target.closest(".open");
-  if (b) openLb(b.dataset.group, +b.dataset.i);
+const b = e.target.closest(".open");
+if (b) openLb(b.dataset.group, +b.dataset.i);
 });
 $("#lbClose").addEventListener("click", closeLb);
 $("#lbScroll").addEventListener("click", e => { if (e.target.id === "lbScroll") closeLb(); });
@@ -383,18 +499,18 @@ document.addEventListener("keydown", e => { if (e.key === "Escape" && !lb.hidden
 
 /* 메일 주소 복사 */
 $("#copyMail").addEventListener("click", async () => {
-  const btn = $("#copyMail");
-  try { await navigator.clipboard.writeText(DATA.profile.email); btn.textContent = "복사됨"; }
-  catch (err) { btn.textContent = "직접 복사해 주세요"; }
-  setTimeout(() => { btn.textContent = "주소 복사"; }, 1800);
+const btn = $("#copyMail");
+try { await navigator.clipboard.writeText(DATA.profile.email); btn.textContent = "복사됨"; }
+catch (err) { btn.textContent = "직접 복사해 주세요"; }
+setTimeout(() => { btn.textContent = "주소 복사"; }, 1800);
 });
 
 /* 현재 위치 표시 */
 const links = [...document.querySelectorAll(".nav a")];
 const io = new IntersectionObserver(entries => {
-  entries.forEach(en => {
-    if (en.isIntersecting) links.forEach(a => a.setAttribute("aria-current", String(a.getAttribute("href") === "#" + en.target.id)));
-  });
+entries.forEach(en => {
+if (en.isIntersecting) links.forEach(a => a.setAttribute("aria-current", String(a.getAttribute("href") === "#" + en.target.id)));
+});
 }, { rootMargin: "-30% 0px -60% 0px" });
 ["sites", "onepage", "popup", "contact"].forEach(id => io.observe(document.getElementById(id)));
 
